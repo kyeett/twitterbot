@@ -1,0 +1,16 @@
+[Unit]
+Description=My Golang Twitterbot
+After=network.target
+
+[Service]
+LogLevel=debug
+Type=simple
+EnvironmentFile=/home/magnuswahlstrand/twitterbot.env
+Environment=ARG1=#golang ARG2=#justforfunc K=-k
+WorkingDirectory=/home/magnuswahlstrand/
+ExecStartPre=/bin/bash -l -c 'env>/tmp/options.debug; echo /home/magnuswahlstrand/twitterbot $K $ARG1 $K $ARG2>/tmp/options2.debug'
+ExecStart=/home/magnuswahlstrand/twitterbot $K $ARG1 $K $ARG2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
